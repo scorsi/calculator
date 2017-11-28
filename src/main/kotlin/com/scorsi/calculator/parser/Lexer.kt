@@ -59,15 +59,19 @@ class Lexer constructor(private val text: String) {
         current == null -> Token(TokenType.EOF)
         current!!.isDigit() -> Token(TokenType.INTEGER, readInteger())
         current!!.isWhitespace() -> { skipWhitespace(); readToken() }
-        else -> when (current) {
-            '+' -> { advance(); Token(TokenType.PLUS) }
-            '-' -> { advance(); Token(TokenType.MINUS) }
-            '/' -> { advance(); Token(TokenType.DIV) }
-            '*' -> { advance(); Token(TokenType.MUL) }
-            '%' -> { advance(); Token(TokenType.MOD) }
-            '(' -> { advance(); Token(TokenType.LPAREN) }
-            ')' -> { advance(); Token(TokenType.RPAREN) }
-            else -> error(current as Char)
+        else -> {
+            val token = current
+            advance()
+            when (token) {
+                '+' -> Token(TokenType.PLUS)
+                '-' -> Token(TokenType.MINUS)
+                '/' -> Token(TokenType.DIV)
+                '*' -> Token(TokenType.MUL)
+                '%' -> Token(TokenType.MOD)
+                '(' -> Token(TokenType.LPAREN)
+                ')' -> Token(TokenType.RPAREN)
+                else -> error(token as Char)
+            }
         }
     }
 
