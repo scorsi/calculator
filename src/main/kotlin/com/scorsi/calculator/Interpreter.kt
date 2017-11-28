@@ -2,7 +2,15 @@ package com.scorsi.calculator
 
 import com.scorsi.calculator.parser.*
 
-class Interpreter constructor(private val parser: Parser) {
+class Interpreter constructor(private val input: String) {
+
+    private lateinit var parser: Parser
+
+    init {
+        Lexer(input).let {
+            lexer -> parser = Parser(lexer)
+        }
+    }
 
     private fun compute(node: AST): Int = when (node) {
         is Integer -> node.value

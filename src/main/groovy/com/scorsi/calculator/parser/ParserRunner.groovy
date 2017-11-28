@@ -1,6 +1,7 @@
 package com.scorsi.calculator.parser
 
-import com.scorsi.calculator.Calculator
+import com.scorsi.calculator.Interpreter
+
 
 class ParserRunner implements Runnable {
 
@@ -11,7 +12,7 @@ class ParserRunner implements Runnable {
     }
 
     void run() {
-        println(new Calculator().interpret(input))
+        println(new Interpreter(input).interpret())
     }
 
 }
